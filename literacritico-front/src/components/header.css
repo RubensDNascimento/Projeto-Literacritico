@@ -1,0 +1,40 @@
+.header{
+    background: wheat;
+    width: 100%;
+    position: fixed;
+}
+
+.toolbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+img{
+    max-width: 200px;
+}
+#headerola{
+    color: #0e97ce;
+    font-size:large;
+    margin:0%;
+    padding: 0% 5%;
+}
+#headersmallblue{
+    color: #0e97ce;
+    font-size:small;
+    margin:0%;
+    padding: 0% 5%;
+}
+#headersmallred{
+    color: #ff1500;
+    font-size:small;
+    margin:0%;
+    padding: 0% 5%;
+    align-self: flex-end;
+}
+#fomr{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}

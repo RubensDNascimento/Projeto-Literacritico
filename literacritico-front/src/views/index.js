@@ -1,0 +1,13 @@
+export { default as Home } from './home/index';
+export { default as Cadastro } from './usuarios/NovoUsuario';
+export { default as CadastroCritico } from './usuarios/novoCritico';
+export { default as EditarNome } from './usuarios/editarNome';
+export { default as ListagemLivros } from './livros/listagemLivros';
+export { default as NovoLivro } from './livros/novoLivro';
+export { default as EditarLivro } from './livros/editarLivro';
+export { default as Desenvolvedor } from './estaticas/desenvolvedor';
+export { default as Ferramentas } from './estaticas/ferramentas';
+export { default as Projeto } from './estaticas/projeto';
+export { default as Contato } from './estaticas/contato';
+export { default as NovaCritica } from './criticas/novaCritica';
+export { default as EditarCritica } from './criticas/editarCritica';
