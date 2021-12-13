@@ -7,10 +7,12 @@ import 'jquery/src/jquery'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/js/dist/dropdown';
 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 ReactDOM.render(
+  <Router>
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode></Router>,
   document.getElementById('root')
 );
 

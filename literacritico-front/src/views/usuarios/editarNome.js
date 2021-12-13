@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import '../../index.css'
 import axios from 'axios';
 import globals from '../../config/Globals';
-import { useNavigate  } from "react-router-dom";
+import { Container } from 'react-bootstrap';
 
 const url = process.env.REACT_APP_BASE_API_URL+"users/edit"
 let nome;
@@ -14,52 +14,62 @@ if (globals.getUser()) {
  nome = globals.getUser().nome;
  email = globals.getUser().email;
 }
-let navigate;
-export default class editarNome extends Component {
+export default function EditarNome(){
 
     
 
-    state = {
-        nome: '',
-        email:'rubens@123',
-        
-      }
+    const [state, setState] = useState({
+        nome: ''
+      })
+      
+    const [erros] = useState([])
 
-      handleChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
+    const handleChange = (event) => {
+        setState({ nome: event.target.value });
       }
-      handleSubmit = event => {
+    const handleSubmit = event => {
         event.preventDefault();
+        erros.splice(0, erros.length)
     
         axios.put( url, { 
             
-            email: this.state.email,
-            nome: this.state.nome }).then((res)=>{
+            email: email,
+            nome: state.nome }).then((res)=>{
                 
                 globals.setUser(res.data.user)
-            }
-            )
+                window.location.replace('/')
+            }).catch((err) => {
+                console.log("Erros: " + erros)
+                    erros.push(err.response.data.msg)
+                setState({
+                    nome: ''
+                })
+            })
       }
-    render() {
         
         return (
             <div>
                 <Header />
-
+                <Container>
+                {erros.map(erro => {
+                            return <div class="alert alert-danger">{erro}</div>
+                        })
+                        }
                 <div class="card bg-light">
                         <div class="card-body" >
                         <h1 id="logocentral">Editar nome</h1>
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={handleSubmit}>
                             <input type="hidden" name="email" value={email} />
                             <label for="nome">Nome</label>
-                            <input type="text" class="form-control" name="nome" placeholder={nome} onChange={this.handleChange}/>
+                            <input type="text" class="form-control" name="nome" placeholder={nome} value={state.nome} onChange={handleChange}/>
                             <br/>
                             <button class ="btn" type ="submit" id='buttongreen' >Editar</button>
                         </form>
                     </div>
                 </div>
+                </Container>
                 <Footer />
             </div>
             )
     }
-}
+

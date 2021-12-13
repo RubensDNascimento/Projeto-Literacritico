@@ -7,7 +7,8 @@ const Review = new Schema({
         required: true
     },
     critico: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'critico',
         required: true
     },
     conteudo: {
@@ -27,5 +28,11 @@ const Review = new Schema({
         default: Date.now()
     }
 })
+Review.virtual('livros',{
+    ref:'book',
+    localField:'_id',
+    foreignField: 'criticas'
+})
+
 
 mongoose.model("review", Review);

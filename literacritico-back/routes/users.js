@@ -18,6 +18,7 @@ router.get("/registerCritico", async(req, res)=>{
 
 router.post("/register", async(req, res)=>{
     var erros =[]
+    console.log(req.body)
     if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){
         erros.push({texto: "Nome inválido"})
     }
@@ -31,7 +32,7 @@ router.post("/register", async(req, res)=>{
         erros.push({texto: "Senha muito curta"})
     }
     if(req.body.senha != req.body.senha2){
-        erros.push({texto: "As senhas são diferentes."})
+        erros.push({texto: "As senhas são diferentes."}) 
     }
     console.log(erros)
 
@@ -40,9 +41,9 @@ router.post("/register", async(req, res)=>{
     }else{
         User.findOne({email: req.body.email}).then((user) => {
             if(user){
-                req.flash("error_msg", "Já existe uma conta esse email");
+                erros.push({texto: "Já existe uma conta esse email"}) 
                 console.log("Já existe uma conta esse email")
-                res.redirect("/users/register")
+                res.status(401).json({success: false, erros:erros});
             }else{
                 
                 const newUser = new User({
@@ -55,20 +56,19 @@ router.post("/register", async(req, res)=>{
                 bcrypt.genSalt(10,(erro, salt) => {
                     bcrypt.hash(newUser.senha, salt, (erro, hash) =>{
                         if (erro) {
-                            req.flash("error_msg", "Não foi possivel salvar o usuário");
-                            console.log("Não foi possivel salvar o usuário")
+                            erros.push({texto: "Não foi possivel salvar o usuário"}) 
+                            res.status(401).json({success: false, erros:erros});
 
                         }
 
                         newUser.senha = hash;
 
                         newUser.save().then(()=>{
-                            res.status(200).json({success: true,user:newUser, msg: "Sucesso"});
+                            res.status(200).json({success: true,user:newUser, msg: "Usuario criado com sucesso!"});
                             console.log("Usuario criado com sucesso!")
                         }).catch((err)=>{
-                            req.flash("error_msg", "Não foi possivel criar o usuário");
-                            console.log("Não foi possivel criar o usuário" + err)
-                            res.redirect("/");
+                            erros.push({texto: "Não foi possivel criar o usuário"}) 
+                            res.status(401).json({success: false, erros:erros});
                         })
 
                     })
@@ -110,13 +110,13 @@ router.put("/edit", async(req,res)=>{
         }).catch((err)=>{
             req.flash("error_msg", "Houve um erro ao salvar novo nome");
                 console.log(err)
-                res.redirect("/");
+                res.status(500).json({success: false,user:user, msg: "Houve um erro ao salvar novo nome"});
         })
 
     }).catch((err)=>{
         req.flash("error_msg", "Houve um erro ao editar nome");
             console.log(err)
-            res.redirect("/");
+            res.status(500).json({success: false,user:user, msg: "Houve um erro ao editar nome"});
     })
 
 })

@@ -21,6 +21,10 @@ const Book = new Schema({
     capa: {
         type: String
     },
+    criticas: {
+        type: Schema.Types.ObjectId,
+        ref: 'review'
+    },
     date:{
         type: Date,
         default: Date.now()

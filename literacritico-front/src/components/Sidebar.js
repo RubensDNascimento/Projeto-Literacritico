@@ -1,33 +1,51 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import './Navbar.css'
 import '../index.css'
+import globals from '../config/Globals'
 import { Card, ListGroup, Row, Col } from 'react-bootstrap'
+import axios from 'axios';
+const url = process.env.REACT_APP_BASE_API_URL + "admin/livros"
 
-export default class Navbar extends Component {
-    render() {
+let livrosAux = [];
+let eCritico;
+if (globals.getUser()) {
 
-        const livros = [
-            { titulo: "Ola", autor: 'Um' },
-            { titulo: "Ola", autor: 'Um' },
-            { titulo: "Olafdsffsdfsfasdasdasdadasda", autor: 'Usdfsdfm' },
-            { titulo: "Ola", autor: 'Um' },
-            { titulo: "Ola", autor: 'Um' }
-        ]
-
-        return (
-            <div>
-                <Card>
-                    <a href="/novoLivro" ><button className="btn" id='buttongreenSide'  >Novo Livro</button></a>
-                    <Row>
-                        {livros.map(item => (
-                            
-                            <div>{item.titulo} - {item.autor}</div>
-                            
-                        ))}
-                    </Row>
-                </Card>
-
-            </div>
-        )
-    }
+    eCritico = globals.getUser().eCritico;
 }
+export default function Navbar() {
+
+
+        const [livros, setLivros] = useState([]);
+
+        if (livros.length ===0) {
+            axios.get(url).then(res=>{
+                Object.entries(res.data.livros.books).forEach(([key, value]) => {
+                    if (livrosAux.length < 10) {
+                        livrosAux.push(value)
+                    }
+                })
+                    setLivros(livrosAux)
+                
+            })
+    }
+    return (
+        <div>
+            <Card>
+                {eCritico === 1 && 
+                <a href="/novoLivro" ><button className="btn" id='buttongreenSide'  >Novo Livro</button></a>}
+                
+                <Row>
+                    <h3 id="flexcenter">Livros</h3>
+                    {livros.map(item => (
+                        <a href={"/criticasPorLivro/" + item._id}><div>{item.titulo} de {item.autor}</div></a>
+                        
+                        
+                    ))}
+                </Row>
+            </Card>
+
+        </div>
+    )
+        }
+
+        

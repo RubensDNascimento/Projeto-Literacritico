@@ -81,7 +81,6 @@ app.get('/', async(req, res)=>{
     }).catch((err)=>{
         req.flash("error_msg", "Não foi carregar as Críticas");
         console.log("Não foi possivel criar a Crítica" + err)
-        res.redirect("/");
     })
 })
 app.get('/posts', estaLogado, async(req, res)=>{
@@ -101,21 +100,29 @@ app.get('/contato', estaLogado,  (req, res)=>{
 })
 
 app.post("/login", async function(req, res) {
+    console.log("Email: " + req.body.email)
     User.findOne({email: req.body.email}).then((user)=>{
         if (!user) {
+            console.log("Usuário não encontrado")
             res.status(401).json({success: false, msg: "Usuário não encontrado"});
         }
+        console.log("Nome user: "+user.nome)
+        console.log(req.body.senha)
         bcrypt.compare(req.body.senha, user.senha, (erro, batem)=>{
             if (batem) {
-                req.user=user;
+                console.log("Batem")
                 const tokenObject = utils.issueJWT(user);
                 res.status(200).json({success: true,user:user, token: tokenObject.token, msg: "Sucesso"});
             } else {
+                console.log("Senha Incorreta")
                 res.status(401).json({success: false, msg: "Senha Incorreta"});
             }
         })
-      }
-    )
+      }).catch((err)=>{
+        if (err) {
+            console.log("Erro:" + err)
+        }
+    })
     })
     
 app.get("/login", passport.authenticate('jwt', { session: false }),

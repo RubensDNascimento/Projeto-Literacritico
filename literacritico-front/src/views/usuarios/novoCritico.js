@@ -1,63 +1,101 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import '../../index.css'
 import axios from 'axios';
 import globals from '../../config/Globals'
-const url = process.env.REACT_APP_BASE_API_URL+"users/register"
+import { Container } from 'react-bootstrap';
+const url = process.env.REACT_APP_BASE_API_URL + "users/register"
 
-export default class novoCritico extends Component {
-    state = {
-        nome:'',
-        email:'',
+export default function NovoCritico() {
+    const [state, setState] = useState({
+        nome: '',
+        email: '',
         senha: '',
+        senha2: '',
         eCritico: 1
-      }
+    })
+    const [erros] = useState([])
+    const [sucesso, setSucesso] = useState('')
 
-      handleChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
-      }
-      handleSubmit = event => {
+    const handleChange = (event) => {
+        setState({ ...state, [event.target.name]: event.target.value });
+        console.log(state.nome)
+    }
+    const handleSubmit = event => {
         event.preventDefault();
-    
-        axios.post( url, { 
-            
-            nome: this.state.nome,
-            email: this.state.email,
-            senha: this.state.senha,
-            eCritico: this.state.eCritico }).then((res)=>{
-                globals.login(res.data.user, res.data.token)
-                console.log(res.data.token)
-                console.log(res.data.user)
-                console.log("ok")
-                
+        erros.splice(0, erros.length)
+        setSucesso('')
+        console.log(state.nome)
+        console.log(state.email)
+
+        axios.post(url, {
+            nome: state.nome,
+            email: state.email,
+            senha: state.senha,
+            senha2: state.senha2,
+            eCritico: state.eCritico
+        }).then((res) => {
+            console.log(res.data.msg)
+            setSucesso(res.data.msg);
+            console.log(sucesso)
+            setState({
+                nome: '',
+                email: '',
+                senha: '',
+                senha2: '',
+                eCritico: 1
             })
-      }
-    render() {
-        return (
-            <div>
+
+        }).catch((err) => {
+            console.log("Erros: " + state.erros)
+            Object.entries(err.response.data.erros).forEach(([key, value]) => {
+                erros.push(value.texto)
+            });
+            setState({
+                nome: '',
+                email: '',
+                senha: '',
+                senha2: '',
+                eCritico: 1
+            })
+        })
+    }
+    return (
+        <div>
             <Header />
 
-            <div class="card bg-light">
+            <Container>
+                <div class="card bg-light">
                     <div class="card-body" >
+                        {erros.map(erro => {
+                            return <div class="alert alert-danger">{erro}</div>
+                        })
+                        }
+                        
+                        {sucesso &&
+                            <div class="alert"  id='msgsucesso' >{sucesso}</div>
+                        
+                        }
+
                         <h1 id="logocentral">Criar uma conta para um novo Crítico</h1>
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={handleSubmit}>
                             <label for="nome">Nome:</label>
-                            <input type="text" name="nome" class="form-control" onChange={this.handleChange} required />
+                            <input type="text" name="nome" class="form-control" value={state.nome} onChange={handleChange} required />
                             <label for="email">Email:</label>
-                            <input type="email" name="email" class="form-control" onChange={this.handleChange} required />
+                            <input type="email" name="email" class="form-control" value={state.email} onChange={handleChange} required />
                             <label for="senha">Senha:</label>
-                            <input type="password" name="senha" class="form-control" onChange={this.handleChange} required />
+                            <input type="password" name="senha" class="form-control" value={state.senha} onChange={handleChange} required />
                             <label for="senha2">Digite a senha novamente:</label>
-                            <input type="password" name="senha2" class="form-control" onChange={this.handleChange} required />
+                            <input type="password" name="senha2" class="form-control" value={state.senha2} onChange={handleChange} required />
 
                             <input type="hidden" name="eCritico" value="1" required />
                             <button type="submit" class="btn" id='buttongreen'>Criar conta</button>
                         </form>
                     </div>
                 </div>
-                <Footer />
-            </div>
-        )
-    }
+            </Container>
+            <Footer />
+        </div>
+    )
 }

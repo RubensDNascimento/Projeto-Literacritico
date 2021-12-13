@@ -1,4 +1,4 @@
-import React, { Component, state, useState } from 'react'
+import React, { useState} from 'react'
 
 import axios from 'axios';
 import globals from '../config/Globals'
@@ -23,10 +23,13 @@ export default function CardLivros({ livro }) {
         event.preventDefault();
         setId(livro._id)
 
-        axios.post(urlDelete, { id: id }).then((res) => {
+        axios.delete(urlDelete, {data: {id:id}}).then((res) => {
             console.log(res.status)
             console.log(res.data)
             console.log("ok")
+            window.location.reload()
+        }).catch(err=>{
+            alert(err.response.data.msg)
         })
     }
     return (
@@ -39,6 +42,7 @@ export default function CardLivros({ livro }) {
                             <h4> {livro.titulo} </h4>
                             <h5> {livro.autor}  </h5>
                             <small> {livro.ano}  </small>
+                            <a href={"/criticasPorLivro/"+livro._id}><button className='btn ' id='headersmallblue'>Ver criticas de {livro.titulo}</button></a>
                             {eCritico === 1 &&
                                 <div>
                                     <a href={"/editarLivro/" + livro._id } ><button class="btn" id='buttongreen'>Editar Livro</button></a>
@@ -51,7 +55,7 @@ export default function CardLivros({ livro }) {
                             }
                         </div>
                         <div class="col-4" >
-                            <p > {livro.sinopse}  </p>
+                            <p id='textarea'> {livro.sinopse}  </p>
                         </div>
                         <div class="col-4 ">
                             <a ><img src={urlCapa + livro.capa} width="250px" class="img-responsive row " /></a>

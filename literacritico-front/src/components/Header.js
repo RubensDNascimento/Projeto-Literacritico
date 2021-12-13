@@ -13,12 +13,12 @@ if (globals.getUser()) {
 }
 console.log(nome)
 
-export default class Header extends Component {
+export default function Header() {
     
-    handleSubmit = event => {
+    const handleSubmit = event => {
         globals.logoutUser();
+        window.location.replace('/login')
       }
-      render(){
           
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -55,10 +55,14 @@ export default class Header extends Component {
                     <div className="row justify-content-end">
                     {user &&
                         
-                        <form id="fomr" onSubmit={this.handleSubmit}>
-                        <a className="navbar-brand  row justify-content-end" id='headersmallblue' href="/editarNome" >Editar nome</a>
+                        <form id="fomr" onSubmit={handleSubmit}>
+                        <a className=" row justify-content-end" id='headersmallblue' href="/editarNome" >Editar nome</a>
                             <a className="navbar-brand  row justify-content-end" id='headersmallred'><button className='btn 'id='headersmallred'>Logout</button></a>
                         </form>
+                    }
+                    {!user &&
+                        
+                        <a className="navbar-brand  row justify-content-end align-content-center" id='headersmallblue' href="/login" >Login</a>
                     }
                     </div>
                 </div>
@@ -67,6 +71,6 @@ export default class Header extends Component {
         </nav>
     )
 }
-}
+
 
 

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
 const User = new Schema({
     nome:{
         type: String,
@@ -17,6 +18,10 @@ const User = new Schema({
     senha:{
         type: String,
         required: true
+    },
+    criticas:{
+        type: Schema.Types.ObjectId,
+        ref: 'review'
     }
 })
 
