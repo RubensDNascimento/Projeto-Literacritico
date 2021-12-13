@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
 const User = new Schema({
     nome:{
         type: String,
@@ -19,10 +18,10 @@ const User = new Schema({
         type: String,
         required: true
     },
-    criticas:{
+    criticas:[{
         type: Schema.Types.ObjectId,
         ref: 'review'
-    }
+    }]
 })
 
 mongoose.model("users", User);

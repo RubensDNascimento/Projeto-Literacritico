@@ -51,6 +51,20 @@ export default function EditarCritica() {
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+    function handleValidate() {
+        if (!critica.titulo || typeof critica.titulo == undefined || critica.titulo == null) {
+            erros.push("Titulo inválido")
+        }
+        if (!critica.conteudo || typeof critica.conteudo == undefined || critica.conteudo == null) {
+            erros.push("Conteudo inválido")
+        }
+        if (!critica.resumo || typeof critica.resumo == undefined || critica.resumo == null) {
+            erros.push("Resumo inválido")
+        }
+        if (!critica.livro || typeof critica.livro == undefined || critica.livro === null || Object.keys(critica.livro).length ===0) {
+            erros.push("Livro inválido")
+        }
+    }
     const handleChange = (event) => {
         setCritica({ ...critica, [event.target.name]: event.target.value });
     }
@@ -58,32 +72,36 @@ export default function EditarCritica() {
         event.preventDefault();
         erros.splice(0, erros.length)
         console.log("Critica: - " + critica.livro)
-
-        axios.post(url, {
-            id: id,
-            titulo: critica.titulo,
-            conteudo: critica.conteudo,
-            resumo: critica.resumo,
-            livro: critica.livro,
-            critico: critico,
-        }
-        ).then((res) => {
-            console.log("Status: " + res.data.status)
-            console.log("msg: " + res.data.msg)
-            setRedirect(true)
-        }).catch((err) => {
-            console.log("Erros: " + erros)
-            console.log(Object.entries(err.response.data.msg))
-            Object.entries(err.response.data.msg).forEach(([key, value]) => {
-                erros.push(value.texto)
-            });
-            setCritica({
-                titulo: '',
-                conteudo: '',
-                resumo: '',
-                livro: critica.livro
+        handleValidate()
+        if (erros.length < 1) {
+            axios.post(url, {
+                id: id,
+                titulo: critica.titulo,
+                conteudo: critica.conteudo,
+                resumo: critica.resumo,
+                livro: critica.livro,
+                critico: critico,
+            }
+            ).then((res) => {
+                console.log("Status: " + res.data.status)
+                console.log("msg: " + res.data.msg)
+                setRedirect(true)
+            }).catch((err) => {
+                console.log("Erros: " + erros)
+                console.log(Object.entries(err.response.data.msg))
+                Object.entries(err.response.data.msg).forEach(([key, value]) => {
+                    erros.push(value.texto)
+                });
+                setCritica({
+                    titulo: '',
+                    conteudo: '',
+                    resumo: '',
+                    livro: critica.livro
+                })
             })
-        })
+        }else{
+            alert(erros)
+        }
     }
     return (
         <div>
@@ -118,9 +136,9 @@ export default function EditarCritica() {
                                         {!livros && <option value="0">Nenhum livro encontrado</option>}
 
                                     </select>
-                                    <a href="/admin/novoLivro" ><button type="button" class="btn" id='buttongreen'>Novo Livro</button></a>
+                                    <a href="/novoLivro" ><button type="button" class="btn" id='buttongreen'>Novo Livro</button></a>
                                 </div>
-                                <a href="/admin/novaCritica"><button type="submit" class="btn " id='buttongreen'>Nova Crítica</button></a>
+                                <a href="/admin/novaCritica"><button type="submit" class="btn " id='buttongreen'>Editar Crítica</button></a>
 
 
 

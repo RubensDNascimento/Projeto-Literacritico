@@ -37,8 +37,25 @@ export default function NovaCritica() {
         })
     }
 
+    function handleValidate() {
+        if (!critica.titulo || typeof critica.titulo == undefined || critica.titulo == null) {
+            erros.push("Titulo inválido")
+        }
+        if (!critica.conteudo || typeof critica.conteudo == undefined || critica.conteudo == null) {
+            erros.push("Conteudo inválido")
+        }
+        if (!critica.resumo || typeof critica.resumo == undefined || critica.resumo == null) {
+            erros.push("Resumo inválido")
+        }
+        if (!critica.livro || typeof critica.livro == undefined || critica.livro === null || Object.keys(critica.livro).length === 0) {
+            erros.push("Livro inválido")
+        }
+    }
+
+
     const handleChange = (event) => {
         setCritica({ ...critica, [event.target.name]: event.target.value });
+        console.log(critica.livro);
     }
     const handleSubmit = event => {
         event.preventDefault();
@@ -50,31 +67,40 @@ export default function NovaCritica() {
             }
         }
 
+        handleValidate();
+        console.log(erros);
+        console.log(erros.length);
+        if (erros.length < 1) {
 
-        axios.post(url, {
-            titulo: critica.titulo,
-            conteudo: critica.conteudo,
-            resumo: critica.resumo,
-            livro: critica.livro,
-            critico: critico,
-        }
-        ).then((res) => {
-            console.log("Status: " + res.data.status)
-            console.log("msg: " + res.data.msg)
-            setRedirect(true)
-        }).catch((err) => {
-            console.log("Erros: " + erros)
-            Object.entries(err.response.data.msg).forEach(([key, value]) => {
-                erros.push(value.texto)
-            });
-            console.log("Erros: " + erros)
-            setCritica({
-                titulo: '',
-                conteudo: '',
-                resumo: '',
-                livro: critica.livro
+            axios.post(url, {
+                titulo: critica.titulo,
+                conteudo: critica.conteudo,
+                resumo: critica.resumo,
+                livro: critica.livro,
+                critico: critico,
+            }
+            ).then((res) => {
+                console.log("Status: " + res.data.status)
+                console.log("msg: " + res.data.msg)
+                setRedirect(true)
+            }).catch((err) => {
+                console.log("Erros: " + erros)
+                Object.entries(err.response.data.msg).forEach(([key, value]) => {
+                    erros.push(value.texto)
+                });
+                console.log("Erros: " + erros)
+                setCritica({
+                    titulo: '',
+                    conteudo: '',
+                    resumo: '',
+                    livro: critica.livro
+                })
             })
-        })
+        } else {
+            alert(erros)
+        }
+
+
     }
 
     return (

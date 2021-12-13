@@ -2,3 +2,13 @@
     background-color: #00CC99;
     width: 100%;
   }
+
+#sideTitulo{
+  margin: 5px;
+  border: #00CC99;
+  border-style: solid;
+}
+
+#sideA{
+  text-decoration: none;
+}

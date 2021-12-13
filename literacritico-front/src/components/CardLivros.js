@@ -38,7 +38,7 @@ export default function CardLivros({ livro }) {
 
                 <div className='card'>
                     <div class="card-body row ">
-                        <div class="col-4" >
+                        <div class="col-3" >
                             <h4> {livro.titulo} </h4>
                             <h5> {livro.autor}  </h5>
                             <small> {livro.ano}  </small>
@@ -54,10 +54,10 @@ export default function CardLivros({ livro }) {
 
                             }
                         </div>
-                        <div class="col-4" >
+                        <div class="col-6" >
                             <p id='textarea'> {livro.sinopse}  </p>
                         </div>
-                        <div class="col-4 ">
+                        <div class="col-3 ">
                             <a ><img src={urlCapa + livro.capa} width="250px" class="img-responsive row " /></a>
                         </div>
                     </div>

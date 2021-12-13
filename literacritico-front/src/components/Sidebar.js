@@ -20,7 +20,7 @@ export default function Navbar() {
         if (livros.length ===0) {
             axios.get(url).then(res=>{
                 Object.entries(res.data.livros.books).forEach(([key, value]) => {
-                    if (livrosAux.length < 10) {
+                    if (livrosAux.length < 10 || livrosAux.length < res.data.livros.books.length) {
                         livrosAux.push(value)
                     }
                 })
@@ -37,7 +37,7 @@ export default function Navbar() {
                 <Row>
                     <h3 id="flexcenter">Livros</h3>
                     {livros.map(item => (
-                        <a href={"/criticasPorLivro/" + item._id}><div>{item.titulo} de {item.autor}</div></a>
+                        <a href={"/criticasPorLivro/" + item._id} id="sideA" ><div id="sideTitulo">{item.titulo}-({item.autor})</div></a>
                         
                         
                     ))}

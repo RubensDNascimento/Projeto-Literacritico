@@ -27,9 +27,33 @@ export default function NovoLivro() {
         setState({ ...state, capa: event.target.files[0] })
         console.log(typeof event.target.files[0])
     }
+    
+    function handleValidate() {
+        let erros=[]
+        if (!state.titulo || typeof state.titulo == undefined || state.titulo == null) {
+            erros.push("Titulo inválido")
+        }
+        if (!state.autor || typeof state.autor == undefined || state.autor == null) {
+            erros.push("Autor inválido")
+        }
+        if (!state.ano || typeof state.ano == undefined || state.ano == null) {
+            erros.push("Ano inválido")
+        }
+        if (state.ano > 2021) {
+            erros.push("Não lançar um livro ainda não lançado")
+        }
+        if (!state.sinopse || typeof state.sinopse == undefined || state.sinopse === null) {
+            erros.push("Sinopse inválida")
+        }
+        if (!state.capa || typeof state.capa == undefined || state.capa === null || Object.keys(state.capa).length ===0) {
+            erros.push("Capa inválida")
+        }
+        return erros
+    }
     const handleSubmit = event => {
         event.preventDefault();
         state.erros.splice(0, state.erros.length)
+        state.erros.push(handleValidate())
         data.append("titulo", state.titulo)
         data.append("autor", state.autor)
         data.append("ano", state.ano)
@@ -40,39 +64,42 @@ export default function NovoLivro() {
             console.log(key[1]);
         }
         console.log(data)
+        console.log(state.erros)
 
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         }
-
-        axios.post(url, data, config).then((res) => {
-            console.log("Status: " + res.data.status)
-            console.log("msg: " + res.data.msg)
-            setState({ ...state, redirect: true })
-
-        }).catch((err) => {
-            console.log("Erros: " + state.erros)
-            console.log(Object.entries(err.response.data.msg))
-            Object.entries(err.response.data.msg).forEach(([key, value]) => {
-                state.erros.push(value.texto)
-            });
-
-            console.log("Erros: " + state.erros)
-            setState({ ...state, titulo:''})
-            setState({ ...state, autor:''})
-            setState({ ...state, ano:0 })
-            setState({ ...state, sinpse:''})
-            setState({ ...state, capa:{}})
-            console.log("tate: " + state.titulo)
-            data.delete("titulo")
-            data.delete("autor")
-            data.delete("ano")
-            data.delete("sinopse")
-            data.delete("capa")
-
-        })
+        if (state.erros.length < 1) {
+            axios.post(url, data, config).then((res) => {
+                console.log("Status: " + res.data.status)
+                console.log("msg: " + res.data.msg)
+                setState({ ...state, redirect: true })
+    
+            }).catch((err) => {
+                console.log("Erros: " + state.erros)
+                console.log(Object.entries(err.response.data.msg))
+                Object.entries(err.response.data.msg).forEach(([key, value]) => {
+                    state.erros.push(value.texto)
+                });
+    
+                console.log("Erros: " + state.erros)
+                setState({ ...state, titulo:''})
+                setState({ ...state, autor:''})
+                setState({ ...state, ano:0 })
+                setState({ ...state, sinpse:''})
+                setState({ ...state, capa:{}})
+                console.log("tate: " + state.titulo)
+                data.delete("titulo")
+                data.delete("autor")
+                data.delete("ano")
+                data.delete("sinopse")
+                data.delete("capa")
+    
+            })
+        }else{alert(state.erros)}
+        
     }
 
     return (

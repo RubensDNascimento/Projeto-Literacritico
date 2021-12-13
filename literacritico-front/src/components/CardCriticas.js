@@ -73,7 +73,7 @@ export default function CardCriticas({ critica }) {
 
                             }
                         </div>
-                        <div class="col-4" >
+                        <div class="col-8" >
                             <p id='textarea'> {critica.resumo}  </p>
                             <a href={"/critica/"+critica._id}><button className='btn ' id='headersmallblue'>Ver Mais</button></a>
                         </div>

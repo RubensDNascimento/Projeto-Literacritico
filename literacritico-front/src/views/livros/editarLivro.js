@@ -43,6 +43,28 @@ function EditarLivro() {
     console.log("Capa Livro: " + livro.capa)
     console.log("CapaAtual: " + capaAtual)
 
+    function handleValidate() {
+        let erros=[]
+        if (!livro.titulo || typeof livro.titulo == undefined || livro.titulo == null) {
+            erros.push("Titulo inválido")
+        }
+        if (!livro.autor || typeof livro.autor == undefined || livro.autor == null) {
+            erros.push("Autor inválido")
+        }
+        if (!livro.ano || typeof livro.ano == undefined || livro.ano == null) {
+            erros.push("Ano inválido")
+        }
+        if (livro.ano > 2021) {
+            erros.push("Não lançar um livro ainda não lançado")
+        }
+        if (!livro.sinopse || typeof livro.sinopse == undefined || livro.sinopse === null) {
+            erros.push("Sinopse inválida")
+        }
+        if (!livro.capa || typeof livro.capa == undefined || livro.capa === null || Object.keys(livro.capa).length ===0) {
+            erros.push("Capa inválida")
+        }
+        return erros
+    }
 
     function handleChange(event){
         console.log(event.target.value)
@@ -59,7 +81,9 @@ function EditarLivro() {
       function handleSubmit(event) {
         event.preventDefault();
         erros.splice(0, erros.length)
-        data.append("id", id)
+        handleValidate()
+        if (erros.length < 1) {
+            data.append("id", id)
         data.append("titulo", livro.titulo)
         data.append("autor", livro.autor)
         console.log("Autor State: " + livro.autor)
@@ -105,6 +129,10 @@ function EditarLivro() {
                 data.delete("sinopse")
                 data.delete("capa")
             })
+        } else {
+            alert(erros)
+        }
+        
       }
 
     return (

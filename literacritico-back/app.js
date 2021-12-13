@@ -22,9 +22,11 @@ require("./models/Reviews");
 const Book = mongoose.model("book");
 const Review = mongoose.model("review");
 const bcrypt = require('bcryptjs');
+const pirmeirosRegistros = require('./helpers/primeirosRegistros')
 
 const utils = require('./helpers/utils');
 const jwt = require('jsonwebtoken');
+const { json } = require('body-parser');
 
 
 require("./models/Users");
@@ -63,6 +65,7 @@ app.set('view engine', 'handlebars');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DB, { useNewUrlParser: true }).then(()=>{
+    pirmeirosRegistros();
     console.log("Conectado ao banco");
 }).catch((err)=>{
     console.log("Erro ao conectar ao banco:" + err);
@@ -144,37 +147,33 @@ app.post('/send', async(req, res) => {
         <p>${req.body.message}</p>`
     
     let transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
+        host: process.env.HOST_MAILER,
+        port: process.env.PORT_MAILER,
         auth: {
-          user: "rubensnascimentoteste@gmail.com", // generated ethereal user
-          pass: "TesteWeb123", // generated ethereal password
+          user: process.env.EMAIL_MAILER, // generated ethereal user
+          pass: process.env.PASSWORD_MAILER, // generated ethereal password
         },
       });
     
       // send mail with defined transport object
       let info =  transporter.sendMail({
-        from: '"Rubens" <rubensnascimentoteste@gmail.com>', // sender address
+        from: `${process.env.NAME_MAILER} <${process.env.EMAIL_MAILER}>`, // sender address
         to: `${req.body.email}`, // list of receivers
         subject: `Mensagem de ${req.body.nome}`, // Subject line
         text: `Mensagem de ${req.body.nome}`, // plain text body
         html: output, // html body
       });
     
-      console.log("Message sent: %s", info.messageId);
-      // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-    
-      // Preview only available when sending through an Ethereal account
-      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-      // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 
-      res.render('pages/contato')
+      res.status(200).json({success: true, msg:"Mensagem enviada"})
 
 });
+
+
 
 app.use('/admin', admin)
 app.use('/users', users)
 
-app.listen(8080, function () {
+app.listen(process.env.API_PORT || 8080, function () {
     console.log("Rodando!");
 });
