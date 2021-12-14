@@ -71,7 +71,7 @@ export default function NovoLivro() {
                 'content-type': 'multipart/form-data'
             }
         }
-        if (state.erros.length > 0) {
+        if (state.erros.length > 1) {
             axios.post(url, data, config).then((res) => {
                 console.log("Status: " + res.data.status)
                 console.log("msg: " + res.data.msg)
@@ -98,7 +98,20 @@ export default function NovoLivro() {
                 data.delete("capa")
     
             })
-        }else{alert(state.erros)}
+        }else{alert(state.erros)
+        
+            console.log("Erros: " + state.erros)
+            setState({ ...state, titulo:''})
+            setState({ ...state, autor:''})
+            setState({ ...state, ano:0 })
+            setState({ ...state, sinpse:''})
+            setState({ ...state, capa:{}})
+            console.log("tate: " + state.titulo)
+            data.delete("titulo")
+            data.delete("autor")
+            data.delete("ano")
+            data.delete("sinopse")
+            data.delete("capa")}
         
     }
 
