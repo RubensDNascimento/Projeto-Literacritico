@@ -309,28 +309,27 @@ function inserirCritica(i, userId, bookId) {
 
 
 module.exports = async function () {
-    for (let i = 0; i < livros.length; i++) {
-        let userAux;
-        let bookAux;
-        let reviewAux;
-        await insirirUsuarios(i).then((res) => {
+    let userAux;
+    let bookAux;
+    for (let i = 0; i < criticas.length; i++) {
+        await insirirUsuarios(i).then((res)=>{
             userAux = res
-        }).catch((err) => {
+        }).catch((err)=>{
             userAux = null
             console.log(err);
-        }
-        )
-        await inserirLivro(i).then((res) => {
+        })
+        await inserirLivro(i).then((res)=>{
             bookAux = res
-        }).catch((err) => {
+        }).catch((err)=>{
             bookAux = null
             console.log(err);
         })
-        await inserirCritica(i, userAux, bookAux).then((res) => {
-            reviewAux = res
+        await inserirCritica(i, userAux, bookAux).catch((err)=>{
+            console.log(err);
         })
-        console.log('--------------------');
-
+        console.log("----------------------");
+        
     }
+    
 }
 
