@@ -74,7 +74,7 @@ export default function EditarCritica() {
         console.log("Critica: - " + critica.livro)
         handleValidate()
         if (erros.length < 1) {
-            axios.post(url, {
+            axios.put(url, {
                 id: id,
                 titulo: critica.titulo,
                 conteudo: critica.conteudo,
@@ -138,7 +138,7 @@ export default function EditarCritica() {
                                     </select>
                                     <a href="/novoLivro" ><button type="button" class="btn" id='buttongreen'>Novo Livro</button></a>
                                 </div>
-                                <a href="/admin/novaCritica"><button type="submit" class="btn " id='buttongreen'>Editar Crítica</button></a>
+                                <a href="/"><button type="submit" class="btn " id='buttongreen'>Editar Crítica</button></a>
 
 
 

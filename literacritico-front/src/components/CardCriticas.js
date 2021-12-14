@@ -43,11 +43,13 @@ export default function CardCriticas({ critica }) {
         event.preventDefault();
         setId(critica._id)
 
-        axios.post(urlDelete, { id: id }).then((res) => {
+        axios.delete(urlDelete, {data:{ id: id }}).then((res) => {
             console.log(res.status)
             console.log(res.data)
             console.log("ok")
             window.location.reload()
+        }).catch(err=>{
+            console.log(err.response.data.msg)
         })
     }
     return (
@@ -58,7 +60,7 @@ export default function CardCriticas({ critica }) {
                     <div class="card-body row ">
                         <h4 id="logocentral"> {critica.titulo} </h4>
                         <div class="col-4" >
-                            <small> Autor: {critico}  </small>
+                            <small> Autor da critica: {critico}  </small>
                             <p><small> Data da publicação: {data}  </small></p>
                             
                             <h5>Livro: {livro} </h5>

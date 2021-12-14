@@ -104,7 +104,7 @@ function EditarLivro() {
         }
         console.log(data)
     
-        axios.post( url, data, config).then((res)=>{
+        axios.put( url, data, config).then((res)=>{
             console.log("Status: "+res.data.status)
             console.log("msg: "+res.data.msg)
             setRedirect(true)

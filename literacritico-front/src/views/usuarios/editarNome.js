@@ -16,8 +16,6 @@ if (globals.getUser()) {
 }
 export default function EditarNome(){
 
-    
-
     const [state, setState] = useState({
         nome: ''
       })
@@ -30,21 +28,28 @@ export default function EditarNome(){
     const handleSubmit = event => {
         event.preventDefault();
         erros.splice(0, erros.length)
-    
-        axios.put( url, { 
-            
-            email: email,
-            nome: state.nome }).then((res)=>{
+
+        if (!state.nome || typeof !state.nome === undefined || !state.nome === null) {
+            erros.push("Nome invalido")
+        }
+        if (erros.length < 1) {
+            axios.put( url, { 
                 
-                globals.setUser(res.data.user)
-                window.location.replace('/')
-            }).catch((err) => {
-                console.log("Erros: " + erros)
-                    erros.push(err.response.data.msg)
-                setState({
-                    nome: ''
+                email: email,
+                nome: state.nome }).then((res)=>{
+                    
+                    globals.setUser(res.data.user)
+                    window.location.replace('/')
+                }).catch((err) => {
+                    console.log("Erros: " + erros)
+                        erros.push(err.response.data.msg)
+                    setState({
+                        nome: ''
+                    })
                 })
-            })
+        } else {
+            alert(erros)
+        }
       }
         
         return (

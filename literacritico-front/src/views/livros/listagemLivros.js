@@ -8,11 +8,11 @@ import { Container } from 'react-bootstrap'
 import axios from 'axios';
 const url = process.env.REACT_APP_BASE_API_URL + "admin/livros"
 
-let nome;
+let eCritico;
 let livrosAux = [];
 if (globals.getUser()) {
 
-    nome = globals.getUser().nome;
+    eCritico = globals.eCritico();
 }
 
 export default function ListagemLivros() {
@@ -39,7 +39,7 @@ export default function ListagemLivros() {
 
                 <div class="card bg-light">
                     <h1 >Livros</h1>
-                    {nome &&
+                    {eCritico &&
                         <a href="/novoLivro" id='flexcenter' ><button class="btn" id='buttongreen'>Novo Livro</button></a>
 
                     }

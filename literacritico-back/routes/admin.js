@@ -28,9 +28,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
-router.get('/', eCritico, async (req, res) => {
-    res.render("admin/index")
-})
+
 router.get('/livros', async (req, res) => {
     Book.find().sort({ date: 'desc' }).then((books) => {
         res.send({
@@ -38,10 +36,8 @@ router.get('/livros', async (req, res) => {
         })
     })
 })
-/*router.get('/novoLivro', eCritico, async (req, res) => {
-    res.render("admin/newBook")
-})*/
-router.get("/editarLivro/:id", async (req, res) => {
+
+router.get("/editarLivro/:id", estaLogado,async (req, res) => {
     Book.findOne({ _id: req.params.id }).then((book) => {
         res.send({ livro: { book } });
         console.log(book)
@@ -52,7 +48,7 @@ router.get("/editarLivro/:id", async (req, res) => {
     })
 })
 
-router.post('/novoLivro', upload.single('capa'), async (req, res, next) => {
+router.post('/novoLivro', estaLogado, eCritico ,upload.single('capa'), async (req, res, next) => {
     var erros = []
     console.log(req.body);
     if (!req.body.titulo || typeof req.body.titulo == undefined || req.body.titulo == null) {
@@ -114,7 +110,7 @@ router.post('/novoLivro', upload.single('capa'), async (req, res, next) => {
 })
 
 
-router.post("/editarLivro", upload.single('capa'), async (req, res) => {
+router.put("/editarLivro", estaLogado,eCritico, upload.single('capa'), async (req, res) => {
     var erros = []
     if (!req.body.titulo || typeof req.body.titulo == undefined || req.body.titulo == null) {
         erros.push({ texto: "Titulo inválido" })
@@ -195,11 +191,12 @@ router.post("/editarLivro", upload.single('capa'), async (req, res) => {
 
 
 
-router.delete("/deleteBook", async (req, res) => {
+router.delete("/deleteBook", estaLogado, eCritico,  async (req, res) => {
 
     console.log(req.body.id)
     Book.findOne({ _id: req.body.id }).then((book)=>{
-        if (book.criticas) {
+        console.log(book.criticas.length);
+        if (book.criticas.length >= 1) {
             res.status(500).json({ success: false, msg: "Você não pode remover este livro pois existem criticas ligadas a ele", criticas: book.critica });
             console.log("Você não pode remover este livro pois existem criticas ligadas a ele")
         }else{
@@ -214,7 +211,7 @@ router.delete("/deleteBook", async (req, res) => {
     })
 })
 
-router.get("/editarCritica/:id", async (req, res) => {
+router.get("/editarCritica/:id", estaLogado, eCritico,  async (req, res) => {
     Review.findOne({ _id: req.params.id }).then((review) => {
         res.send({ critica: { review } });
         console.log(review)
@@ -233,7 +230,7 @@ router.get("/getLivros", async (req, res) => {
         console.log(err)
     })
 })
-router.post("/novaCritica", async (req, res) => {
+router.post("/novaCritica", estaLogado, eCritico,  async (req, res) => {
     var erros = []
     console.log(req.body)
     if (!req.body.titulo || typeof req.body.titulo == undefined || req.body.titulo == null) {
@@ -300,7 +297,7 @@ router.post("/novaCritica", async (req, res) => {
     }
 })
 
-router.post("/editarCritica", async (req, res) => {
+router.put("/editarCritica", estaLogado, eCritico,  async (req, res) => {
     var erros = []
     console.log(req.body)
     if (!req.body.titulo || typeof req.body.titulo == undefined || req.body.titulo == null) {
@@ -389,10 +386,12 @@ router.post('/getLivro', async (req, res) => {
         res.status(400).json({ success: false, msg: "Houve um erro interno" });
     })
 })
-router.post("/deleteCritica", async (req, res) => {
+router.delete("/deleteCritica", estaLogado, eCritico,  async (req, res) => {
 
     console.log(req.body.id)
     Review.findOne({ _id: req.body.id }).then((review) => {
+        console.log("----------------");
+        console.log(review);
         Book.findOneAndUpdate(
             {_id: review.livro},
             {$pull:{criticas: review.id}},

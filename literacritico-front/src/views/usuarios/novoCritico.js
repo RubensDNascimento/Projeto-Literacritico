@@ -22,44 +22,68 @@ export default function NovoCritico() {
         setState({ ...state, [event.target.name]: event.target.value });
         console.log(state.nome)
     }
+
+    function handleValidate() {
+        if (!state.nome || typeof state.nome === undefined || state.nome === null) {
+            erros.push("Nome inválido")
+        }
+        if (!state.email || typeof state.email === undefined || state.email === null) {
+            erros.push("Email inválido")
+        }
+        if (!state.senha || typeof state.senha === undefined || state.senha === null) {
+            erros.push("Senha invalida inválido")
+        }
+        if (state.senha.length < 4) {
+            erros.push("A senha precisa ter ao menos 4 digitos")
+        }
+        if (state.senha !== state.senha2) {
+            erros.push("As senha não podem ser diferentes")
+        }
+        return erros
+    }
     const handleSubmit = event => {
         event.preventDefault();
         erros.splice(0, erros.length)
         setSucesso('')
-        console.log(state.nome)
         console.log(state.email)
+        console.log(state.nome)
+        handleValidate()
+        if (erros.length < 1) {
 
-        axios.post(url, {
-            nome: state.nome,
-            email: state.email,
-            senha: state.senha,
-            senha2: state.senha2,
-            eCritico: state.eCritico
-        }).then((res) => {
-            console.log(res.data.msg)
-            setSucesso(res.data.msg);
-            console.log(sucesso)
-            setState({
-                nome: '',
-                email: '',
-                senha: '',
-                senha2: '',
-                eCritico: 1
+            axios.post(url, {
+                nome: state.nome,
+                email: state.email,
+                senha: state.senha,
+                senha2: state.senha2,
+                eCritico: state.eCritico
+            }).then((res) => {
+                console.log(res.data.msg)
+                setSucesso(res.data.msg);
+                console.log(sucesso)
+                setState({
+                    nome: '',
+                    email: '',
+                    senha: '',
+                    senha2: '',
+                    eCritico: 1
+                })
+            }).catch((err) => {
+                console.log("Erros: " + state.erros)
+                Object.entries(err.response.data.erros).forEach(([key, value]) => {
+                    erros.push(value.texto)
+                });
+                setState({
+                    nome: '',
+                    email: '',
+                    senha: '',
+                    senha2: '',
+                    eCritico: 1
+                })
             })
+        } else {
+            alert(erros)
+        }
 
-        }).catch((err) => {
-            console.log("Erros: " + state.erros)
-            Object.entries(err.response.data.erros).forEach(([key, value]) => {
-                erros.push(value.texto)
-            });
-            setState({
-                nome: '',
-                email: '',
-                senha: '',
-                senha2: '',
-                eCritico: 1
-            })
-        })
     }
     return (
         <div>
@@ -72,10 +96,10 @@ export default function NovoCritico() {
                             return <div class="alert alert-danger">{erro}</div>
                         })
                         }
-                        
+
                         {sucesso &&
-                            <div class="alert"  id='msgsucesso' >{sucesso}</div>
-                        
+                            <div class="alert" id='msgsucesso' >{sucesso}</div>
+
                         }
 
                         <h1 id="logocentral">Criar uma conta para um novo Crítico</h1>

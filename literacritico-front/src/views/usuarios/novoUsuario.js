@@ -28,32 +28,59 @@ const NovoUsuario =()=> {
           [evt.target.name]: value
         });
       }
+      
+    
+    function handleValidate() {
+        if (!state.nome || typeof state.nome == undefined || state.nome == null) {
+            erros.push("Nome inválido")
+        }
+        if (!state.email || typeof state.email == undefined || state.email == null) {
+            erros.push("Email inválido")
+        }
+        if (!state.senha || typeof state.senha == undefined || state.senha == null) {
+            erros.push("Senha invalida inválido")
+        }
+        if (state.senha.length < 4) {
+            erros.push("A senha precisa ter ao menos 4 digitos")
+        }
+        if (state.senha !== state.senha2 ) {
+            erros.push("As senha não podem ser diferentes")
+        }
+        return erros
+    }
       const handleSubmit = event => {
         event.preventDefault();
         erros.splice(0, erros.length)
-        axios.post( url, {
-            nome: state.nome,
-            email: state.email,
-            senha: state.senha,
-            senha2: state.senha2,
-            eCritico: state.eCritico })
-            .then(res=>{
-                console.log(res.data.user)
-                console.log("res.data.user")
-                setRedirect(true)
-            }).catch((err) => {
-              console.log("Erros: " + state.erros)
-              Object.entries(err.response.data.erros).forEach(([key, value]) => {
-                  erros.push(value.texto)
-              });
-              setState({
-                  nome: '',
-                  email: '',
-                  senha: '',
-                  senha2: '',
-                  eCritico: 0
+        handleValidate();
+        console.log(erros.length)
+
+        if (erros.length<1) {
+            axios.post( url, {
+                nome: state.nome,
+                email: state.email,
+                senha: state.senha,
+                senha2: state.senha2,
+                eCritico: state.eCritico })
+                .then(res=>{
+                    console.log(res.data.user)
+                    console.log("res.data.user")
+                    setRedirect(true)
+                }).catch((err) => {
+                  console.log("Erros: " + state.erros)
+                  Object.entries(err.response.data.erros).forEach(([key, value]) => {
+                      erros.push(value.texto)
+                  });
+                  setState({
+                      nome: '',
+                      email: '',
+                      senha: '',
+                      senha2: '',
+                      eCritico: 0
+                  })
               })
-          })
+        } else {
+            alert(erros)
+        }
       }
       
         return (

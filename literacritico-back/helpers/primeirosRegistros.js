@@ -48,7 +48,7 @@ const users = [
 
 const livros = [
     {
-        titulo: 'Cidade dos ossos',
+        titulo: 'Cidade dos Ossos',
         autor: 'Cassandra Clare',
         ano: 2007,
         sinopse: 'Uma aventura que envolve o mito dos nephilim — homens e mulheres que trazem, em suas veias, o sangue de anjos — e que chegou às listas de mais vendidos do New York Times, onde permaneceu por semanas.Cidade dos ossos nos apresenta Clarissa, uma adolescente típica: aos quase 16 anos mora com a mãe, uma jovem artista viúva. Tem um “tio” postiço, Luke, que de certa forma ocupa o lugar do pai e um melhor amigo, Simon, que nutre por ela uma paixão secreta. Quando Simon e Clary visitam um clube, a menina vê três adolescentes matarem um rapaz. Há, porém, dois grandes problemas: ninguém acha o corpo e apenas ela vê os tais assassinos. Sua vida muda completamente. A mãe é raptada por demônios e ela descobre a existência dos Caçadores das Sombras, guerreiros cuja missão é proteger o mundo que conhecemos de bestas e outras criaturas. Vampiros que saem da linha, lobisomens descontrolados, monstros cheios de veneno? É por aí mesmo. E depois desse primeiro contato com o Mundo de Sombras, e com Jace — um Caçador que tem a aparência de um anjo, mas a língua tão afiada quanto Lúcifer —, Clary nunca mais será a mesma.',
@@ -89,42 +89,41 @@ const criticas = [
         titulo: 'Resenha: Duna, de Frank Herbert',
         conteudo: 'Em um futuro muito distante, quando a humanidade já se espalhou pelas estrelas e a Terra é apenas uma lembrança (as datas usadas falam do ano dez mil, mas o livro não especifica se isso é depois de Cristo ou existe outro marco), a sociedade é sustentada por quatro pilares: o imperador, as casas nobres, a Guilda Espacial e as Bene Gesserit. O imperador centraliza o poder, as casas nobres lutam entre si por destaque, mas respeitando a autoridade do monarca, a Guilda Espacial tem o monopólio da viagem espacial e do banco do império, e as Bene Gesserit são uma parte de ordem de mulheres com poderes e propósitos estranhos. \n As duas casas principais são a casa dos Atreides e dos Harkonnen, os primeiros considerados uma casa justa e honrada, enquanto os segundos são vistos como degenerados e traiçoeiros. Parte de uma armação envolvendo o imperador e os Harkonnen, a casa de Atreides ganha o planeta de Arrakis. \nConhecido como Duna, o planeta Arrakis é composto por um gigantesco deserto, praticamente nenhuma água, algumas cidades e uma população de beduínos, os fremen. As condições desse planeta são severas ao ponto de qualquer um que sair no deserto vai morrer em poucas horas, se não devidamente protegido por um traje isolante que reaproveita a água do próprio corpo. Mas também é o único lugar da galáxia que se encontra a especiaria, que a Guilda usa para as viagens espaciais. Sem a especiaria é impossível viajar, então ela é o bem mais precioso que existe.',
         resumo: 'Em um futuro muito distante, quando a humanidade já se espalhou pelas estrelas e a Terra é apenas uma lembrança',
-        livro: "61b6d8b1f85db736ff3f4b1a",
-        critico: "61b6d35176b80dd10593daba"
+        livro: 'Duna',
+        critico: 'Bruce Wayne'
     },
     {
         titulo: 'Resenha | Cidade dos Ossos – Cassandra Clare',
         conteudo: 'Cassandra Clare é responsável por escrever a série de seis livros Os Instrumentos Mortais, ganhando fama mundial desde o lançamento do primeiro, Cidade dos Ossos, em 2007. Os livros repercutiram de modo positivo, posteriormente sendo adaptados para filme e série de TV (disponível na Netflix)\nA autora conquistou os fãs através da escrita fluída e personagens marcantes. Clare sabe os ingredientes necessários para criar um enredo convidativo e instigante, personagens profundamente moldados para se tornarem reais na mente do leitor.\nDepois do sequestro da mãe, Clary descobre que os três adolescentes da boate eram, na verdade, Caçadores de Sombras, e o homem assassinado, um membro do Submundo (formado por vampiros, lobisomens, fadas e feiticeiros que coexistem entre os humanos e os nephilins). Ela é levada ao Instituto, local onde vivem os nephilins, onde aprende sobre a criação dos Caçadores de Sombras a partir de três instrumentos mortais dado pelo anjo Raziel.',
         resumo: 'Cassandra Clare é responsável por escrever a série de seis livros Os Instrumentos Mortais, ganhando fama mundial desde o lançamento do primeiro, Cidade dos Ossos, em 2007. Os livros repercutiram de modo positivo, posteriormente sendo adaptados para filme e série de TV (disponível na Netflix)',
-        livro: "61b6d8b1f85db736ff3f4b16",
-        critico: "61b6d35176b80dd10593dab7"
+        livro: 'Cidade dos Ossos',
+        critico: 'admin'
     },
     {
         titulo: '5 motivos para ler (ou correr de) It, a Coisa',
         conteudo: 'It - A Coisa se tornou um livro bastante conhecido nos últimos anos por conta das duas adaptações de sucesso para o cinema. Eu conheci o livro por conta da primeira adaptação, aquela lá dos anos 90 com o ator Tim Curry como "Pennywise, o palhaço dançarino" mas me lembro de ter corrido da leitura assim que vi o tamanho do livro: um calhamaço com em torno de 1.100 páginas. Pois então, enrolei e enrolei até que finalmente tomei coragem.\nComo haviam se passado anos que eu tinha assistido a adaptação, resolvi que não assistiria aos filmes novos enquanto não lesse o livro e coloquei isso como meta para 2020. Já não lembrava tanto da história, apenas superficialmente e iniciar a leitura sem saber muito sobre foi maravilhoso e surpreendente, visto que em muitos momentos em me peguei bem chocada com o livro que apesar de ser de ótima qualidade, perde um pouco do ritmo em alguns  trechos.\nAgora que terminei a leitura, além de continuar afirmando que King continua na minha lista de autores favoritos, trouxe também alguns motivos que me chamaram a atenção de forma positiva ou negativa durante a leitura.',
         resumo: 'It - A Coisa se tornou um livro bastante conhecido nos últimos anos por conta das duas adaptações de sucesso para o cinema. Eu conheci o livro por conta da primeira adaptação, aquela lá dos anos 90 com o ator Tim Curry como "Pennywise, o palhaço dançarino" mas me lembro de ter corrido da leitura assim que vi o tamanho do livro: um calhamaço com em torno de 1.100 páginas. Pois então, enrolei e enrolei até que finalmente tomei coragem.',
-        livro: "61b6d8b1f85db736ff3f4b18",
-        critico: "61b6d35176b80dd10593dabb"
+        livro: 'It - A Coisa',
+        critico: 'Charles Xavier'
     },
     {
         titulo: '8 Lições que aprendemos com Senhor dos Anéis',
         conteudo: '1 - Ter sempre um objetivo claro: Na primeira parte da Trilogia, “A Sociedade do Anel”, Frodo — como o guardião do Anel — é persistente na missão de destruir o objeto no mesmo fogo em que foi forjado por Sauron. Esse é o primeiro e principal objetivo que o levou a formar uma sociedade com: Gandalf, Legolas, Gimli, Aragon, Boromir, Merry, Pippin, Samwise. Se eles não tivessem tudo isso bem estabelecido para si, não teriam porqua formar a irmandade e, assim, partir em uma jornada para cumprir a missão. Da mesma forma, na vida, devemos sempre ter um objetivo claro do que queremos nos tornar e, simultaneamente, seguir o caminho para alcançá-lo.\n 2 - Buscar coragem em todos os momentos: Quem você diria que é o “herói” da série de Tolkien? O Frodo? Afinal, ele era o único que carregava o Anel do Poder para a Montanha da Perdição. Alguns podem pensar que o verdadeiro herói é Gandalf. Sem a sua sabedoria e orientação, a Terra-média certamente teria sido invadida. E Eowyn? Ela era a única que podia derrotar o Rei-Bruxo na batalha.\n Existem muitos personagens que você pode escolher, mas todos têm uma coisa em comum: coragem. Tolkien viveu durante os anos em que a Alemanha nazista estava pronta para ofuscar o mundo e, sem dúvidas, viu pessoas comuns chamadas a realizar atos extraordinários de heroísmo. Como ele escreveu: “Até mesmo a menor das pessoas pode mudar o rumo do futuro”.\n 3. Exercer forte determinação: Isso pode ser reconhecido como referência para o filme. Tome, por exemplo, o momento em que Gandalf supostamente morreu após o ataque do feroz dragão, seguido pela morte de Boromir — quando ele foi surpreendentemente atacado pelo exército de Sauron, enquanto continuava a sua viagem. Apesar de Gandalf e da morte súbita de Boromir, Frodo estava determinado a continuar sua jornada sozinho para cumprir seu objetivo de destruir o Anel, enquanto ele sabia que o mesmo Anel também poderia destruí-lo. Do mesmo modo, na vida, ter um objetivo não necessariamente nos conduz ao sucesso de maneira fácil, mas é preciso seguir sempre esse objetivo com plena determinação.',
         resumo: '1 - Ter sempre um objetivo claro: Na primeira parte da Trilogia, “A Sociedade do Anel”, Frodo — como o guardião do Anel — é persistente na missão de destruir o objeto no mesmo fogo em que foi forjado por Sauron. Esse é o primeiro e principal objetivo que o levou a formar uma sociedade com: Gandalf, Legolas, Gimli, Aragon, Boromir, Merry, Pippin, Samwise. Se eles não tivessem tudo isso bem estabelecido para si, não teriam porqua formar a irmandade e, assim, partir em uma jornada para cumprir a missão.',
-        livro: "61b6d8b1f85db736ff3f4b17",
-        critico: "61b6d35176b80dd10593dab9"
+        livro: 'Senhor dos Anéis: Asociedade do Anel',
+        critico: 'Steve Rogers'
     },
     {
-        titulo: 'Livro Assassin’s Creed: Heresia aborda a origem do game',
+        titulo: 'Livro Assassins Creed: Heresia aborda a origem do game',
         conteudo: 'Conhecer a origem dos conflitos entre Assassinos e Templários pode mudar sua concepção desse embate. E esse é o tema central de Assassin’s Creed: Heresia, novo livro de Christie Golden, que tem como protagonista Simon Hathaway (Templário) e que venceu o Prêmio Scribe de 2017.\n “Membro do salão sagrado interno dos Templários e novo Chefe da Divisão de Pesquisa Histórica das Abstergo Industries, Simon é prático e racional, mas ao mesmo tempo tem uma curiosidade voraz por um de seus antepassados. Gabriel Laxart lutou ao lado de Joana D’Arc e, ao entrar no Animus, Simon pretende saciar seu desejo vivendo a história dele em primeira mão”, informa a apresentação do livro. “Mas ele não estava preparado para o que veria. Sua descoberta sobre a profundidade do conflito entre Templários e Assassinos e uma revelação sobre hereges e detentores da fé pode afetar toda a Ordem dos Templários no presente.”\n Assim como a série de games é um sucesso absoluto com mais de 90 milhões de unidades vendidas, os livros de Assassin’s Creed são uma surpresa no mercado brasileiro, com mais de 1,5 milhão de exemplares vendidos. \nA autora do livro, Christie Golden, tem mais de 35 romances de ficção e terror, muitos baseados em séries como Star Wars, Star Trek e World of Warcraft. Particularmente, recomendo World of Warcraft: Marés de Guerra, que aborda a era Mists of Pandaria e é um dos melhores da autora.',
         resumo: 'Conhecer a origem dos conflitos entre Assassinos e Templários pode mudar sua concepção desse embate. E esse é o tema central de Assassin’s Creed: Heresia, novo livro de Christie Golden, que tem como protagonista Simon Hathaway (Templário) e que venceu o Prêmio Scribe de 2017.\n “Membro do salão sagrado interno dos Templários e novo Chefe da Divisão de Pesquisa Histórica das Abstergo Industries, Simon é prático e racional,...',
-        livro: "61b6d8b1f85db736ff3f4b19",
-        critico: "61b6d35176b80dd10593dab8"
+        livro: 'Heresia – Assassins Creed',
+        critico: 'Rubens'
     },
 ]
 
+function insertUser() {
 
-
-module.exports = async function () {
     User.find().then((user) => {
         if (user.length > 0) {
             console.log("Já Existem usuários cadastrados");
@@ -150,7 +149,6 @@ module.exports = async function () {
                         newUser.save().then(() => {
                             console.log("Usuario criado com sucesso!")
                         }).catch((err) => {
-                            erros.push({ texto: "Não foi possivel criar o usuário" })
                             console.log("Não foi possivel criar o usuário")
                         })
 
@@ -161,6 +159,9 @@ module.exports = async function () {
             })
         }
     })
+}
+
+function insertBook() {
 
     Book.find().then((book) => {
         if (book.length > 0) {
@@ -184,43 +185,68 @@ module.exports = async function () {
             })
         }
     })
+}
 
-    Review.find().then((review) => {
-        if (review.length > 0) {
-            console.log("Já Existem criticas cadastradas");
-            return;
-        } else {
-            criticas.map((value) => {
 
-                const newReview = new Review({
-                    titulo: value.titulo,
-                    critico: value.critico,
-                    conteudo: value.conteudo,
-                    resumo: value.resumo,
-                    livro: value.livro
-                })
-                newReview.save().then(() => {
-                    Book.findOneAndUpdate(
-                        { _id: newReview.livro },
-                        { $push: { criticas: newReview.id } },
-                        function (err, success) {
-                            if (err) {
-                                console.log("Este livro não existe")
-                            }
-                        })
-                    User.findOneAndUpdate(
-                        { _id: newReview.critico },
-                        { $push: { criticas: newReview.id } },
-                        function (err, success) {
-                            if (err) {
-                                console.log("Este usuario não existe")
-                            }
-                        })
-                    console.log("Crítica criado com sucesso!");
-                })
+
+module.exports = async function () {
+    insertUser()
+    insertBook()
+    let userAux;
+    let bookAux;
+    let us;
+    for (let i = 0; i < criticas.length; i++) {
+        const user = User.findOne({ nome: criticas[i].critico }, function (err, userOne) {
+            if (err) {
+                console.log("Erro ao encontrar usuarios");
+                return;
             }
-            )
-        }
-    })
+            userAux = userOne
+
+                const book = Book.findOne({ titulo: criticas[i].livro }, function (err, bookOne) {
+                    if (err) {
+                        console.log("Erro ao encontrar livros");
+                        return;
+                    }
+                    bookAux = bookOne
+                    for (let j = 0; j < criticas.length; j++) {
+                        if (criticas[j].critico == userAux.nome && criticas[i].livro == bookAux.titulo) {
+                            console.log(criticas[i].titulo);
+                            const newReview = new Review({
+                                titulo: criticas[i].titulo,
+                                critico:  userAux._id,
+                                conteudo:  criticas[i].conteudo,
+                                resumo:  criticas[i].resumo,
+                                livro:  bookAux._id
+                            })
+                            //console.log(newReview);
+                            
+                            newReview.save().then(() => {
+                                Book.findOneAndUpdate(
+                                    { _id: newReview.livro },
+                                    { $push: { criticas: newReview.id } },
+                                    function (err, success) {
+                                        if (err) {
+                                            console.log("Este livro não existe")
+                                        }
+                                    })
+                                User.findOneAndUpdate(
+                                    { _id: newReview.critico },
+                                    { $push: { criticas: newReview.id } },
+                                    function (err, success) {
+                                        if (err) {
+                                            console.log("Este usuario não existe")
+                                        }
+                                    })
+                                console.log("Crítica criado com sucesso!");
+                            })
+                        }
+                    }
+
+
+                })
+        
+        })
+    }
 }
 

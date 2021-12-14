@@ -135,17 +135,21 @@ function(req, res) {
 );
 
 app.post('/send', async(req, res) => {
-    const output = ` 
-        <p>Você tem uma nova mensagem</p>    
-        <h3>Detalhes do contato</h3>    
-        <ul>        
-            <li>Name: ${req.body.nome}</li>        
-            <li>Telefone: ${req.body.telefone}</li>        
-            <li>Email: ${req.body.email}</li>    
-        </ul>    
-        <h3>Mensagem:</h3>    
-        <p>${req.body.message}</p>`
-    
+    let erros = [];
+        if (!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null) {
+            erros.push("Nome inválido")
+        }
+        if (!req.body.email || typeof req.body.email == undefined || req.body.email == null) {
+            erros.push("Email inválido")
+        }
+        if (!req.body.telefone || typeof req.body.telefone == undefined || req.body.telefone == null) {
+            erros.push("Telefone inválido")
+        }
+        if (!req.body.mensagem || typeof req.body.mensagem == undefined || req.body.mensagem === null) {
+            erros.push("Mensagem inválida")
+        }
+    if (erros < 1) {
+        
     let transporter = nodemailer.createTransport({
         host: process.env.HOST_MAILER,
         port: process.env.PORT_MAILER,
@@ -163,10 +167,24 @@ app.post('/send', async(req, res) => {
         text: `Mensagem de ${req.body.nome}`, // plain text body
         html: output, // html body
       });
-    
 
       res.status(200).json({success: true, msg:"Mensagem enviada"})
 
+    } else {
+        console.log(erros)
+        res.status(400).json({success:false, msg: erros})
+    }
+    const output = ` 
+        <p>Você tem uma nova mensagem</p>    
+        <h3>Detalhes do contato</h3>    
+        <ul>        
+            <li>Name: ${req.body.nome}</li>        
+            <li>Telefone: ${req.body.telefone}</li>        
+            <li>Email: ${req.body.email}</li>    
+        </ul>    
+        <h3>Mensagem:</h3>    
+        <p>${req.body.message}</p>`
+    
 });
 
 

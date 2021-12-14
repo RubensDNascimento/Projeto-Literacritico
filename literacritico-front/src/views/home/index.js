@@ -5,6 +5,7 @@ import Sidebar from '../../components/Sidebar'
 import Feed from '../../components/Feed'
 import { Container, Row, Col } from 'react-bootstrap'
 import globals from '../../config/Globals'
+import { useLocation } from 'react-router-dom'
 let eCritico;
 let nome;
 if (globals.getUser()) {
@@ -14,15 +15,28 @@ if (globals.getUser()) {
 }
 
 
-export default class index extends Component {
+export default function Index()  {
 
-    render() {
+    const { state } = useLocation();
+    const [erros] = useState([])
+    if (state) {
+        const {msg} = state;
+        if (msg ) {
+            if (!erros.includes(msg)) {
+                erros.push(msg)
+            }
+        }
+    }
         return (
             <div>
                 <Header />
                 <Container>
                     <div class="card bg-light">
                         <div class="card-body" id="logocentral">
+                        {erros.map(erro => {
+                            return <div class="alert alert-danger">{erro}</div>
+                        })
+                        }
                             <img src="/images/literacritico-logo.png" alt="Logo" style={{ width: 300 }} />
                             <p>O projeto se trata de uma especie de blog e rede social literario onde os administradores poderão publicar suas resenhas de suas ultimas
                                 leituras e os usuarios padrões terão acessos à essas resenhas</p>
@@ -41,4 +55,4 @@ export default class index extends Component {
             </div>
         )
     }
-}
+

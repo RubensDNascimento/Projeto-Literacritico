@@ -6,7 +6,7 @@ const User = mongoose.model("users");
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const { doesNotMatch } = require('assert');
-const { eCritico } = require('../helpers/accessControl');
+const { eCritico, estaLogado  } = require('../helpers/accessControl');
 require("dotenv").config();
 
 router.get("/register", async(req, res)=>{
@@ -87,12 +87,10 @@ router.post("/register", async(req, res)=>{
 })
 
 
-
-router.get("/edit/:id", async(req,res)=>{
-    res.render("users/editName");
-})
-router.put("/edit", async(req,res)=>{
+router.put("/edit", estaLogado ,async(req,res)=>{
     var erros =[]
+    console.log("--------------------");
+    console.log(req.user);
     if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){
         erros.push({texto: "Nome inválido"});
         console.log("Nome inválido")
@@ -123,8 +121,6 @@ router.put("/edit", async(req,res)=>{
 
 router.get('/logout', async(req, res)=>{
     req.logout();
-    req.flash('seccess_msg', "Usuário deslogado!");
-    res.redirect('/');
 })
 router.get('/logado', async(req, res)=>{
     if (res.locals.user) {

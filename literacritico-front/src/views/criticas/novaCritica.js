@@ -136,9 +136,9 @@ export default function NovaCritica() {
                                     {!livros && <option value="0">Nenhum livro encontrado</option>}
 
                                 </select>
-                                <a href="/admin/novoLivro" ><button type="button" class="btn" id='buttongreen'>Novo Livro</button></a>
+                                <a href="/novoLivro" ><button type="button" class="btn" id='buttongreen'>Novo Livro</button></a>
                             </div>
-                            <a href="/admin/novaCritica"><button type="submit" class="btn " id='buttongreen'>Nova Crítica</button></a>
+                            <a href="/"><button type="submit" class="btn " id='buttongreen'>Nova Crítica</button></a>
 
 
 

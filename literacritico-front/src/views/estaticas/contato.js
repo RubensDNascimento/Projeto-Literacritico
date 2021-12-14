@@ -35,10 +35,22 @@ export default function Contato() {
     }
     const handleSubmit = event => {
         event.preventDefault();
+        erros.splice(0, erros.length)
+        handleValidate()
         if (erros.length < 1) {
 
             axios.post(url, state).then(res => {
                 alert("Mensagem enviada")
+            }).catch(err=>{
+                Object.entries(err.response.data.msg).forEach(([key, value]) => {
+                    erros.push(value)
+                });
+                setState({
+                    nome: '',
+                    email: '',
+                    telefone: '',
+                    mensagem: ''
+                })
             })
         } else {
             alert(erros)
@@ -50,25 +62,29 @@ export default function Contato() {
             <Container>
                 <div class="card bg-light">
                     <div class="card-body">
+                            {erros.map(erro => {
+                                return <div class="alert alert-danger">{erro}</div>
+                            })
+                            }
                         <h1 >Contato</h1>
                         <h3>Envie uma mensagem</h3>
 
                         <form onSubmit={handleSubmit}>
                             <p>
                                 <label>Nome:</label>
-                                <input type="text" name="nome" class="form-control" onChange={handleChange} />
+                                <input type="text" name="nome" class="form-control" value={state.nome} onChange={handleChange} required />
                             </p>
                             <p>
                                 <label>Email:</label>
-                                <input type="email" name="email" class="form-control" onChange={handleChange} />
+                                <input type="email" name="email" class="form-control" value={state.email} onChange={handleChange}  required  />
                             </p>
                             <p>
                                 <label>Telefone:</label>
-                                <input type="text" name="telefone" class="form-control" onChange={handleChange} />
+                                <input type="text" name="telefone" class="form-control" value={state.telefone} onChange={handleChange} required />
                             </p>
                             <p>
                                 <label>Mensagem:</label>
-                                <textarea name="message" rows="5" class="form-control" onChange={handleChange}></textarea>
+                                <textarea name="mensagem" rows="5" class="form-control" value={state.mensagem} onChange={handleChange}></textarea>
                             </p>
                             <p>
                                 <button class="btn " id='buttongreen' type="submit">Enviar</button>
