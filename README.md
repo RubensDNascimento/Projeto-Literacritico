@@ -26,6 +26,7 @@ Usuário de Exemplos =
     pretendo fazer isso com Usuários tambem.
 
 Observações:
+  - Para Rodar o projeto é necessatio entrar em ambas as pastas (literacritico-front e literacritico-back), abrir um terminal em cada uma e instalar as dependencias com "npm install" nas duas pastas, para rodar: no front usar "npm start" e no back usar "docker-compose up"
   - Eu não entendo 100% ainda essa tecnologia do Docker, então se o "docker-compose up" não funcionar, utilize o "npm start" na pasta do back
   - Se for alterar alguma porta precisar chegar ambos arquivos .env
   - Na barra sidebar da página Home esta duplicado, pretendo corrigir isso se tiver uma fase de "Recuperação", assim como pretendo melhorar o visual
