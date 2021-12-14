@@ -45,7 +45,7 @@ export default function NovoLivro() {
         if (!state.sinopse || typeof state.sinopse == undefined || state.sinopse === null) {
             erros.push("Sinopse inválida")
         }
-        if (!state.capa || typeof state.capa == undefined || state.capa === null || Object.keys(state.capa).length ===0) {
+        if (!state.capa || typeof state.capa == undefined || state.capa === null) {
             erros.push("Capa inválida")
         }
         return erros
@@ -71,7 +71,7 @@ export default function NovoLivro() {
                 'content-type': 'multipart/form-data'
             }
         }
-        if (state.erros.length < 1) {
+        if (state.erros.length > 0) {
             axios.post(url, data, config).then((res) => {
                 console.log("Status: " + res.data.status)
                 console.log("msg: " + res.data.msg)
