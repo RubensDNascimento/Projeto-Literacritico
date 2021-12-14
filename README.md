@@ -12,6 +12,7 @@ Usuário de Exemplos =
     Senha: EuSouBatman
 
   Outros exemplos de usuários e dados iniciais estão no arquivo: /literacritico-back/helpers/primeirosRegistros.js
+  Eu fiz algumas operações um pouco diferente das especificações do projeto, um usuário não logado não tem acesso aos posts, apenas as páginas estáticas. Ao criar um conta ele é definido para ser usuário padrão, onde tem acessos às postagens e livros. Aas operações de escluir,editar e criar estão restritas ao Criticos, um conta de Critico só pode ser criado por um Critico. Se isso for um problema posso retirar.
 
   Sobre o banco:
     Existem três entidades: 
