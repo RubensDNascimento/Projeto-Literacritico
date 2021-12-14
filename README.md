@@ -2,13 +2,27 @@
 
 Usuário de Exemplos = 
   Critico (Administrador)
+
     Email: Rubens@123
     Senha: 1234
     
   Usuário padrão:
+
     Email: batman@forever
     Senha: EuSouBatman
+
   Outros exemplos de usuários e dados iniciais estão no arquivo: /literacritico-back/helpers/primeirosRegistros.js
+
+  Sobre o banco:
+    Existem três entidades: 
+   - User 
+  - Book
+  - Review
+    
+    Review liga com Book e User e ambas tem tem um campo array de review, onde é feito um push no hora de adicionar uma nova review.
+    
+    É possivel listar as reviews referente a algum livro na pagina "Livros", 
+    pretendo fazer isso com Usuários tambem.
 
 Observações:
   - Eu não entendo 100% ainda essa tecnologia do Docker, então se o "docker-compose up" não funcionar, utilize o "npm start" na pasta do back
