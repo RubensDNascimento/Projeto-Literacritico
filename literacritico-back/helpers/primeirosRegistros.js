@@ -195,6 +195,7 @@ module.exports = async function () {
     let userAux;
     let bookAux;
     let us;
+    
     for (let i = 0; i < criticas.length; i++) {
         const user = User.findOne({ nome: criticas[i].critico }, function (err, userOne) {
             if (err) {
@@ -210,6 +211,8 @@ module.exports = async function () {
                     }
                     bookAux = bookOne
                     for (let j = 0; j < criticas.length; j++) {
+                        if (userAux && bookAux) {
+                         
                         if (criticas[j].critico == userAux.nome && criticas[i].livro == bookAux.titulo) {
                             console.log(criticas[i].titulo);
                             const newReview = new Review({
@@ -240,7 +243,8 @@ module.exports = async function () {
                                     })
                                 console.log("Crítica criado com sucesso!");
                             })
-                        }
+                        }   
+                    }
                     }
 
 
