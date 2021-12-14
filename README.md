@@ -11,7 +11,8 @@ Usuário de Exemplos =
   Outros exemplos de usuários e dados iniciais estão no arquivo: /literacritico-back/helpers/primeirosRegistros.js
 
 Observações:
-  - Eu não entendo 100% ainda essa tecnologia do Docker, então se o docker-compose não funcionar, utilize o "npm start" na pasta do back
+  - Eu não entendo 100% ainda essa tecnologia do Docker, então se o "docker-compose up" não funcionar, utilize o "npm start" na pasta do back
   - Se for alterar alguma porta precisar chegar ambos arquivos .env
   - Na barra sidebar da página Home esta duplicado, pretendo corrigir isso se tiver uma fase de "Recuperação", assim como pretendo melhorar o visual
+  - O formulário de contato envia o email para o valor passado no campo "Email" para facilitar nos testes
   
