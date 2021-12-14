@@ -122,44 +122,6 @@ const criticas = [
     }
 ]
 
-function insertUser() {
-
-    User.find().then((user) => {
-        if (user.length > 0) {
-            console.log("Já Existem usuários cadastrados");
-            return;
-        } else {
-            users.map((value) => {
-                const newUser = new User({
-                    nome: value.nome,
-                    email: value.email,
-                    senha: value.senha,
-                    eCritico: value.eCritico
-                })
-
-
-                bcrypt.genSalt(10, (erro, salt) => {
-                    bcrypt.hash(newUser.senha, salt, (erro, hash) => {
-                        if (erro) {
-                            console.log("Não foi possivel salvar o usuário")
-                        }
-
-                        newUser.senha = hash;
-
-                        newUser.save().then(() => {
-                            console.log("Usuario criado com sucesso!")
-                        }).catch((err) => {
-                            console.log("Não foi possivel criar o usuário")
-                        })
-
-                    })
-                })
-
-
-            })
-        }
-    })
-}
 
 function insirirUsuarios(i) {
 
