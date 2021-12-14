@@ -270,6 +270,7 @@ function inserirCritica(i, userId, bookId) {
 
 
 
+
 module.exports = async function () {
     let userAux;
     let bookAux;

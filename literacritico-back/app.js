@@ -63,6 +63,7 @@ app.engine('handlebars', handlebars({defaultLayout: 'main', runtimeOptions: {
 app.set('view engine', 'handlebars');
 
 
+
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DB, { useNewUrlParser: true }).then(()=>{
     pirmeirosRegistros();
