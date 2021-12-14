@@ -1,4 +1,4 @@
-export { default as Home } from './home/index';
+export { default as Home } from './home/Index';
 export { default as Cadastro } from './usuarios/NovoUsuario';
 export { default as CadastroCritico } from './usuarios/NovoCritico';
 export { default as Login } from './usuarios/Login';
@@ -9,7 +9,7 @@ export { default as EditarLivro } from './livros/EditarLivro';
 export { default as Desenvolvedor } from './estaticas/desenvolvedor';
 export { default as Ferramentas } from './estaticas/ferramentas';
 export { default as Projeto } from './estaticas/projeto';
-export { default as Contato } from './estaticas/contato';
+export { default as Contato } from './estaticas/Contato';
 export { default as NovaCritica } from './criticas/NovaCritica';
 export { default as EditarCritica } from './criticas/EditarCritica';
 export { default as Critica } from './criticas/Critica';
