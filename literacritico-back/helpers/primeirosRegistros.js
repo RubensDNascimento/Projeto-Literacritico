@@ -180,19 +180,19 @@ function insirirUsuarios(i) {
 
                 bcrypt.genSalt(10, (erro, salt) => {
                     if (erro) {
-                        console.log("Houve um erro ao gerar salt de "+ newUser.nome);
+                        console.log("Houve um erro ao gerar salt de " + newUser.nome);
                         reject(erro)
                     } else {
                         bcrypt.hash(newUser.senha, salt, (erro, hash) => {
                             if (erro) {
-                                console.log("Houve um erro em criptografar a senha de "+ newUser.nome)
+                                console.log("Houve um erro em criptografar a senha de " + newUser.nome)
                                 reject(erro)
                             }
-    
+
                             newUser.senha = hash;
-    
+
                             return newUser.save((err, usuario) => {
-    
+
                                 if (err) {
                                     console.log("Erro ao cadastrar " + newUser.nome);
                                     reject(err)
@@ -200,7 +200,7 @@ function insirirUsuarios(i) {
                                 console.log(usuario.nome + " criado com sucesso!")
                                 resolve(usuario._id)
                             })
-    
+
                         })
                     }
                 })
@@ -253,12 +253,12 @@ function inserirCritica(i, userId, bookId) {
                     console.log(criticas[i].titulo + " Já esta cadastrado");
                     resolve(criticas[i].titulo + " Já esta cadastrado")
                 } else {
-                    User.findById(userId).then((user)=>{
+                    User.findById(userId).then((user) => {
                         if (!user) {
                             console.log('Critico não encontrado');
                             reject('Critico não encontrado')
                         } else {
-                            Book.findById(bookId).then((book)=>{
+                            Book.findById(bookId).then((book) => {
                                 if (!book) {
                                     console.log('Livro não encontrado');
                                     reject('Critico não encontrado')
@@ -300,7 +300,6 @@ function inserirCritica(i, userId, bookId) {
                             })
                         }
                     })
-                    
                 }
             })
         }
