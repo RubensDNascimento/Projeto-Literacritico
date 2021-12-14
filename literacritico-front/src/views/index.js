@@ -4,11 +4,7 @@ export { default as CadastroCritico } from './usuarios/NovoCritico';
 export { default as Login } from './usuarios/Login';
 export { default as EditarNome } from './usuarios/EditarNome';
 export { default as ListagemLivros } from './livros/ListagemLivros';
-<<<<<<< HEAD
-export { default as NovoLivro } from './livros/novoLivro';
-=======
 export { default as NovoLivro } from './livros/NovoLivro';
->>>>>>> c09be9edce3843dc907d6945290a72c2b3127cc6
 export { default as EditarLivro } from './livros/EditarLivro';
 export { default as Desenvolvedor } from './estaticas/desenvolvedor';
 export { default as Ferramentas } from './estaticas/ferramentas';
